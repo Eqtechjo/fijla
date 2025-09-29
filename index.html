@@ -32,7 +32,6 @@ body {
   font-family: 'Cairo', sans-serif;
   color:#222; background:#fff; line-height:1.6;
   overflow-x:hidden; text-align:center;
-  width: 100%;        /* يضمن أن الجسم لا يتجاوز عرض الشاشة */
 }
 
 }
@@ -646,6 +645,23 @@ langBtn.addEventListener('click', (e) => {
 document.addEventListener('click', () => {
   langMenu.classList.remove('active');
 });
+function disableHorizontalScroll() {
+  // منع تمرير الصفحة أفقياً
+  document.body.style.overflowX = 'hidden';
+  document.documentElement.style.overflowX = 'hidden';
+
+  // لمنع السحب باللمس على الموبايل
+  document.addEventListener('touchmove', function(e) {
+    if (e.touches.length === 1) { // إصبع واحد
+      const deltaX = e.touches[0].clientX - (e._startX || 0);
+      if (!('_startX' in e)) e._startX = e.touches[0].clientX;
+      if (deltaX !== 0) e.preventDefault();
+    }
+  }, { passive: false });
+}
+
+// استدعاء الفنكشن
+disableHorizontalScroll();
 
 </script>
 
