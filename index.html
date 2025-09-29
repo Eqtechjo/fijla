@@ -646,18 +646,10 @@ document.addEventListener('click', () => {
   langMenu.classList.remove('active');
 });
 function disableHorizontalScroll() {
-  // منع تمرير الصفحة أفقياً
   document.body.style.overflowX = 'hidden';
   document.documentElement.style.overflowX = 'hidden';
-
-  // لمنع السحب باللمس على الموبايل
-  document.addEventListener('touchmove', function(e) {
-    if (e.touches.length === 1) { // إصبع واحد
-      const deltaX = e.touches[0].clientX - (e._startX || 0);
-      if (!('_startX' in e)) e._startX = e.touches[0].clientX;
-      if (deltaX !== 0) e.preventDefault();
-    }
-  }, { passive: false });
+  document.body.style.overflowY = 'auto';
+  document.documentElement.style.overflowY = 'auto';
 }
 
 // استدعاء الفنكشن
@@ -667,5 +659,6 @@ disableHorizontalScroll();
 
 </body>
 </html>
+
 
 
